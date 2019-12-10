@@ -21,8 +21,6 @@ import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -41,7 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.NumberUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ibm.fullstack.entity.ExcelColumn;
@@ -196,7 +193,7 @@ public class ExcelUtils {
             //
             field.set(t, (Date)cellValue);
         } else if (type == String.class) {
-            field.set(t, cellValue.toString());
+            field.set(t, cellValue.toString().trim().replaceAll("\\u00A0+", ""));
         } else {
             Constructor<?> constructor = type.getConstructor(String.class);
             field.set(t, constructor.newInstance(cellValue));

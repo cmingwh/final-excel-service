@@ -41,12 +41,13 @@ public class ExcelController {
 
 	@ApiOperation(value = "导入")
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void readExcel(MultipartFile file){
+    public List<StockPrice> readExcel(MultipartFile file){
         long t1 = System.currentTimeMillis();
         List<StockPriceDto> list = ExcelUtils.readExcel("", StockPriceDto.class, file);
         long t2 = System.currentTimeMillis();
         logger.info(String.format("read over! cost:%sms", (t2 - t1)));
         List<StockPrice> data = Utils.convertToStockPrice(list);
         stockPriceService.saveAll(data);
+        return data;
     }
 }

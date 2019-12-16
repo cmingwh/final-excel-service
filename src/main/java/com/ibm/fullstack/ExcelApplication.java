@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @CrossOrigin
-class ResourceApplication {
+class ExcelApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ResourceApplication.class, args);
+		SpringApplication.run(ExcelApplication.class, args);
 	}
 
 }
